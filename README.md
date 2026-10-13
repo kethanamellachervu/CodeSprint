@@ -67,8 +67,3 @@ Open `http://localhost:5050` in your browser.
 
 The objective of CodeSprint is to provide a structured coding practice environment where students can solve problems, practise under time constraints, participate in virtual contests, and monitor their progress.
 
-## Author
-
-**Kethana Mellachervu**
-
-GitHub: [kethanamellachervu](https://github.com/kethanamellachervu)
