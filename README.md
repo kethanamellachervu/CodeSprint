@@ -1,95 +1,32 @@
-# ⚡ CodeSprint — Competitive Programming Platform
+# ⚡ CodeSprint — Competitive Programming Practice Platform
 
-**Practice smarter. Solve faster.**
+CodeSprint is a college project designed to help students improve their coding and problem-solving skills through structured practice, timed coding sessions, virtual contests, and progress tracking.
 
-CodeSprint is a full-stack competitive programming practice platform designed to help students and developers improve their problem-solving speed through structured practice, timed sessions, virtual contests, and progress tracking.
+## Features
 
-## 🚀 Features
+- **Timed Practice:** Practise solving coding problems using a countdown timer.
+- **Difficulty Levels:** Solve Codeforces problems arranged into eight difficulty levels.
+- **Problem Explorer:** Search and filter problems by difficulty, rating, and topic.
+- **Virtual Contests:** Practise with five-problem simulated contests.
+- **Progress Tracking:** Track solved problems and practice time through a dashboard.
+- **Guest Mode:** Start practising without creating an account and synchronize progress after logging in.
 
-### 1. Timed Practice
-- Practise solving coding problems with a countdown timer.
-- Track the time spent on practice sessions.
-- Build consistency through time-based practice.
+## Technologies Used
 
-### 2. Difficulty Levels
-- Organizes Codeforces problems into eight progressive difficulty levels.
-- Helps users move from easier problems to more challenging ones.
-- Encourages structured learning.
+- **Frontend:** HTML, CSS, JavaScript, Bootstrap
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB, Mongoose
+- **Authentication:** JWT, bcryptjs
+- **API Integration:** Codeforces API
+- **Charts:** Chart.js
 
-### 3. Problem Explorer
-- Browse real Codeforces problems.
-- Search and filter problems by difficulty, rating, and topic.
-- Access problem statements directly on Codeforces.
-
-### 4. Virtual Contests
-- Practise with simulated five-problem contests.
-- Solve problems under time constraints.
-- Improve contest readiness and time management.
-
-### 5. Progress Dashboard
-- Track solved problems and practice sessions.
-- View topic-wise and difficulty-wise statistics.
-- Analyse practice time and problem-solving progress through charts.
-
-### 6. Guest Mode and Cloud Sync
-- Start practising without creating an account.
-- Store guest progress in browser local storage.
-- Synchronize guest progress with a user account after registration or login.
-
-## 🛠️ Tech Stack
-
-| Component | Technologies |
-|---|---|
-| Frontend | HTML5, CSS3, JavaScript (ES6+), Bootstrap 5 |
-| Charts | Chart.js |
-| Backend | Node.js, Express.js |
-| Database | MongoDB Atlas, Mongoose |
-| Authentication | JWT, bcryptjs |
-| Problem Data | Codeforces API |
-| Storage | Browser local storage and database persistence |
-
-## 🏗️ How It Works
-
-1. Users browse coding problems from the Codeforces problem catalog.
-2. They select problems based on difficulty or topic.
-3. They practise using the timer or participate in virtual contests.
-4. Their practice sessions and solved problems can be recorded.
-5. The dashboard displays progress and performance statistics.
-6. Registered users can synchronize their progress with the backend.
-
-## 📂 Project Structure
-
-```text
-CodeSprint/
-├── assets/
-├── backend/
-│   ├── config/
-│   ├── controllers/
-│   ├── middleware/
-│   ├── models/
-│   ├── routes/
-│   ├── utils/
-│   ├── server.js
-│   └── .env.example
-├── css/
-├── js/
-├── contest.html
-├── index.html
-├── levels.html
-├── practice.html
-├── problems.html
-├── profile.html
-├── progress.html
-├── package.json
-└── README.md
-```
-
-## ⚙️ Installation and Setup
+## Installation and Setup
 
 ### Prerequisites
+
 - Node.js 18 or later
 - npm
-- MongoDB Atlas account for persistent cloud storage
+- MongoDB Atlas account (for database connectivity)
 
 ### 1. Clone the repository
 
@@ -106,7 +43,7 @@ npm install
 
 ### 3. Configure environment variables
 
-Create your local environment file by copying the example.
+Create a `.env` file inside the `backend` folder by copying the example file.
 
 **Windows PowerShell:**
 
@@ -114,64 +51,24 @@ Create your local environment file by copying the example.
 Copy-Item backend/.env.example backend/.env
 ```
 
-Configure the values in `backend/.env`:
+Configure the required environment variables in `backend/.env`, including your MongoDB connection string and JWT secret.
 
-```env
-PORT=5050
-NODE_ENV=development
-JWT_SECRET=replace_with_a_secure_secret
-JWT_EXPIRES_IN=7d
-MONGODB_URI=your_mongodb_connection_string
-```
+Keep your credentials private and do not upload your `.env` file to GitHub.
 
-Use your actual MongoDB connection string and keep secrets private. Do not commit your `.env` file.
-
-### 4. Start the application
+### 4. Run the application
 
 ```bash
 npm start
 ```
 
-Open the application at:
+Open `http://localhost:5050` in your browser.
 
-`http://localhost:5050`
+## Project Objective
 
-## 🧪 Testing
+The objective of CodeSprint is to provide a structured coding practice environment where students can solve problems, practise under time constraints, participate in virtual contests, and monitor their progress.
 
-The repository includes API and end-to-end test scripts.
-
-Run the API tests:
-
-```bash
-node backend/test-api.js
-```
-
-Run the end-to-end tests:
-
-```bash
-node backend/test-e2e.js
-```
-
-Ensure the backend and its required configuration are available before running the tests.
-
-## 🔐 Security
-
-- Password hashing using bcryptjs.
-- JWT-based authentication.
-- Environment variables for sensitive configuration.
-- Authentication middleware for protected endpoints.
-- Rate limiting on authentication endpoints.
-
-## 🎯 Project Goal
-
-CodeSprint brings problem discovery, timed practice, virtual contests, and progress tracking into one platform. Its goal is to help competitive programmers practise consistently, identify areas for improvement, and develop better problem-solving habits.
-
-## 👩‍💻 Author
+## Author
 
 **Kethana Mellachervu**
 
-GitHub: [@kethanamellachervu](https://github.com/kethanamellachervu)
-
-## 📄 License
-
-This project is licensed under the MIT License, subject to the repository's license file.
+GitHub: [kethanamellachervu](https://github.com/kethanamellachervu)
