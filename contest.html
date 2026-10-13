@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Contest Simulation - CodeSprint</title>
+  <meta name="description" content="Simulate a real 5-problem competitive programming contest with live countdown timers and problem tracking.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <div class="glow-orb-top"></div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg cs-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="assets/logo.svg" alt="CodeSprint Logo" class="logo-img">
+        <div>
+          <div>Code<span class="text-gradient">Sprint</span></div>
+          <span class="brand-tagline">Practice smarter. Solve faster.</span>
+        </div>
+      </a>
+
+      <button class="navbar-toggler text-light border-0" type="button" data-bs-toggle="collapse" data-bs-target="#csNavbarNav" aria-label="Toggle navigation">
+        <i class="bi bi-list fs-2 text-white"></i>
+      </button>
+
+      <div class="collapse navbar-collapse" id="csNavbarNav">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-1">
+          <li class="nav-item"><a class="cs-nav-link" href="index.html"><i class="bi bi-house-door"></i> Home</a></li>
+          <li class="nav-item"><a class="cs-nav-link" href="levels.html"><i class="bi bi-layers"></i> Levels</a></li>
+          <li class="nav-item"><a class="cs-nav-link" href="problems.html"><i class="bi bi-code-slash"></i> Problems</a></li>
+          <li class="nav-item"><a class="cs-nav-link active" href="contest.html"><i class="bi bi-stopwatch"></i> Contest</a></li>
+          <li class="nav-item"><a class="cs-nav-link" href="progress.html"><i class="bi bi-graph-up-arrow"></i> Progress</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <button class="btn-icon" id="navNotificationBtn" title="Speed Tips" aria-label="Notifications">
+            <i class="bi bi-bell"></i>
+            <span class="notification-badge"></span>
+          </button>
+          <button class="btn-cs-secondary" data-bs-toggle="modal" data-bs-target="#profileModal" id="navProfileBtn">
+            <i class="bi bi-person-circle"></i>
+            <span id="navProfileBtnText">Sprint Master</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Contest Main -->
+  <main class="container py-4">
+    <!-- Header -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+      <div>
+        <span class="badge-pill-accent mb-2">Simulated Pressure</span>
+        <h1 class="h2 text-white mb-1">5-Problem Virtual Contest</h1>
+        <p class="text-secondary small mb-0">Build stamina and solve under real contest time constraints. Code solutions on Codeforces and log your sprint.</p>
+      </div>
+
+      <!-- Tier and Duration Selectors -->
+      <div class="d-flex align-items-center gap-2">
+        <select id="contestTierSelect" class="cs-input cs-select py-1 px-3 small">
+          <option value="warmup">Warmup (A, A, B, B, C)</option>
+          <option value="div2" selected>Standard Div. 2 (A, B, C, D, E)</option>
+          <option value="advanced">Advanced Div. 1 (C, D, E, F, G)</option>
+        </select>
+        <select id="contestDurationSelect" class="cs-input cs-select py-1 px-3 small">
+          <option value="60">1h 00m</option>
+          <option value="90">1h 30m</option>
+          <option value="120" selected>2h 00m</option>
+          <option value="150">2h 30m</option>
+        </select>
+        <button id="btnNewContest" class="btn-cs-secondary py-1 px-3 small" title="Reroll 5 new problems">
+          <i class="bi bi-arrow-clockwise"></i> New Set
+        </button>
+      </div>
+    </div>
+
+    <!-- Live Timer & Score Banner -->
+    <div class="cs-card cs-card-glow mb-4 p-4">
+      <div class="row align-items-center g-3">
+        <!-- Countdown Clock -->
+        <div class="col-md-4 text-center text-md-start">
+          <div class="text-muted small text-uppercase">Time Remaining</div>
+          <div id="contestTimeRemaining" style="font-family: var(--font-mono); font-size: 2.8rem; font-weight: 800; color: var(--text-primary); line-height: 1.1;">
+            02:00:00
+          </div>
+          <div class="text-secondary small mt-1">
+            Elapsed: <span id="contestTimeElapsed" class="text-white" style="font-family: var(--font-mono);">00:00:00</span>
+          </div>
+        </div>
+
+        <!-- Progress bar & Score -->
+        <div class="col-md-4 text-center">
+          <div id="contestSolvedCounter" class="h4 text-gradient fw-bold mb-2">0 / 5 Solved</div>
+          <div class="progress" style="height: 8px; background: #0B0D10;">
+            <div id="contestProgressBar" class="progress-bar" style="width: 100%; background: var(--accent-gradient); transition: width 1s linear;"></div>
+          </div>
+        </div>
+
+        <!-- Contest Controls -->
+        <div class="col-md-4 text-center text-md-end">
+          <button id="btnStartContest" class="btn-cs-primary px-4 py-2">
+            <i class="bi bi-play-circle-fill fs-5"></i> Start Contest
+          </button>
+          <button id="btnPauseContest" class="btn-cs-secondary px-3 py-2 d-none">
+            <i class="bi bi-pause-fill fs-5"></i> Pause
+          </button>
+          <button id="btnResumeContest" class="btn-cs-primary px-3 py-2 d-none">
+            <i class="bi bi-play-fill fs-5"></i> Resume
+          </button>
+          <button id="btnFinishContest" class="btn-cs-success px-3 py-2 d-none ms-2">
+            <i class="bi bi-flag-fill"></i> Finish & Submit
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 Problems List -->
+    <div class="mb-3">
+      <h5 class="text-white mb-3">Contest Problemset (5 Problems)</h5>
+      <div id="contestProblemsList">
+        <!-- Rendered by js/contest.js -->
+      </div>
+    </div>
+
+    <!-- Instructions Notice -->
+    <div class="alert alert-dark border-secondary p-3 mt-4" style="background: #12151B; color: #A1A1AA;">
+      <i class="bi bi-info-circle text-info me-2"></i>
+      <strong>Virtual Contest Rules:</strong> Solve each problem by submitting to Codeforces. As soon as you obtain an 'Accepted' verdict on the official judge, click <strong>Mark Solved</strong> to log your timestamp. When finished, hit <strong>Finish & Submit</strong> to analyze your sprint.
+    </div>
+  </main>
+
+  <!-- Contest Summary Modal -->
+  <div class="modal fade" id="contestSummaryModal" tabindex="-1" aria-labelledby="contestSummaryLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content cs-modal">
+        <div class="modal-header cs-modal-header">
+          <h5 class="modal-title text-white" id="contestSummaryLabel">
+            <i class="bi bi-trophy-fill text-gradient me-2"></i> Contest Results Summary
+          </h5>
+        </div>
+        <div class="modal-body p-4">
+          <div class="row g-3 mb-4 text-center">
+            <div class="col-4">
+              <div class="p-3 rounded" style="background: #12151B; border: 1px solid var(--border-color);">
+                <div class="text-muted small">Problems Solved</div>
+                <div class="h3 fw-bold text-white mb-0" id="summaryContestScore">0 / 5</div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="p-3 rounded" style="background: #12151B; border: 1px solid var(--border-color);">
+                <div class="text-muted small">Total Time</div>
+                <div class="h3 fw-bold text-white mb-0" id="summaryContestTime" style="font-family: var(--font-mono);">00:00:00</div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="p-3 rounded" style="background: #12151B; border: 1px solid var(--border-color);">
+                <div class="text-muted small">Performance Tier</div>
+                <div id="summaryContestTier" class="mt-1">Rank</div>
+              </div>
+            </div>
+          </div>
+
+          <h6 class="text-white mb-2">Problem Breakdown:</h6>
+          <div id="summaryContestProblemsList" class="mb-3">
+            <!-- Problem breakdown list -->
+          </div>
+
+          <p class="text-secondary small mb-0">
+            Contest results have been saved to your LocalStorage analytics.
+          </p>
+        </div>
+        <div class="modal-footer cs-modal-footer justify-content-between">
+          <a href="progress.html" class="btn-cs-secondary py-2 px-3 small">
+            <i class="bi bi-graph-up"></i> Go to Analytics
+          </a>
+          <button type="button" class="btn-cs-primary py-2 px-4 small" onclick="window.location.reload()">
+            <i class="bi bi-arrow-repeat"></i> Start Another Contest
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile Modal -->
+  <div class="modal fade" id="profileModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content cs-modal">
+        <div class="modal-header cs-modal-header">
+          <h5 class="modal-title text-white">Local Profile & Settings</h5>
+          <button type="button" class="btn-close-cs" data-bs-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body p-4">
+          <div class="mb-3">
+            <label class="form-label text-secondary small fw-bold">Display Name</label>
+            <input type="text" id="profileDisplayNameInput" class="cs-input" placeholder="Sprint Master">
+          </div>
+          <div class="mb-3">
+            <label class="form-label text-secondary small fw-bold">Codeforces Handle</label>
+            <input type="text" id="profileCfHandleInput" class="cs-input" placeholder="e.g. tourist">
+          </div>
+          <div class="mb-4">
+            <label class="form-label text-secondary small fw-bold">Preferred Training Stage</label>
+            <select id="profileStageSelect" class="cs-input cs-select">
+              <option value="Beginner">Beginner (Level A - B)</option>
+              <option value="Intermediate" selected>Intermediate (Level C - D)</option>
+              <option value="Advanced">Advanced (Level E - F)</option>
+              <option value="Master">Master (Level G - H)</option>
+            </select>
+          </div>
+          <div class="d-flex justify-content-between align-items-center pt-2 border-top border-secondary">
+            <button type="button" id="btnResetAllData" class="btn-cs-danger py-1 px-3 small">
+              <i class="bi bi-trash3"></i> Reset Data
+            </button>
+            <a href="profile.html" class="text-secondary small">View Detailed Profile &rarr;</a>
+          </div>
+        </div>
+        <div class="modal-footer cs-modal-footer">
+          <button type="button" class="btn-cs-secondary py-1 px-3" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" id="btnSaveProfile" class="btn-cs-primary py-1 px-4">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Footer -->
+  <footer class="cs-footer">
+    <div class="container text-center text-md-start">
+      <div class="row g-4 align-items-center">
+        <div class="col-md-6">
+          <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mb-2">
+            <img src="assets/logo.svg" alt="CodeSprint Logo" style="width: 24px; height: 24px;">
+            <strong class="text-white">CodeSprint</strong>
+          </div>
+          <p class="text-muted small mb-0">Contest simulations designed to prepare you for official Codeforces Div. 2 rounds.</p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <div class="d-flex justify-content-center justify-content-md-end gap-3 mb-2">
+            <a href="index.html">Home</a>
+            <a href="levels.html">Levels</a>
+            <a href="problems.html">Problems</a>
+            <a href="progress.html">Progress</a>
+          </div>
+          <div class="text-muted small">&copy; 2026 CodeSprint.</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/backend-api.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/contest.js"></script>
+</body>
+</html>

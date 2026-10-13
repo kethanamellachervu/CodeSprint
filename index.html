@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeSprint - Competitive Programming Speed Training</title>
+  <meta name="description" content="Build your competitive programming speed with timed Codeforces challenges, structured difficulty levels, and personalized performance analytics.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+
+  <!-- Google Fonts: Outfit & Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Top Ambient Glow -->
+  <div class="glow-orb-top"></div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg cs-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="assets/logo.svg" alt="CodeSprint Logo" class="logo-img">
+        <div>
+          <div>Code<span class="text-gradient">Sprint</span></div>
+          <span class="brand-tagline">Practice smarter. Solve faster.</span>
+        </div>
+      </a>
+
+      <!-- Mobile Hamburger Toggle -->
+      <button class="navbar-toggler text-light border-0" type="button" data-bs-toggle="collapse" data-bs-target="#csNavbarNav" aria-controls="csNavbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="bi bi-list fs-2 text-white"></i>
+      </button>
+
+      <!-- Center Links & Right Profile -->
+      <div class="collapse navbar-collapse" id="csNavbarNav">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-1">
+          <li class="nav-item">
+            <a class="cs-nav-link active" href="index.html">
+              <i class="bi bi-house-door"></i> Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="cs-nav-link" href="levels.html">
+              <i class="bi bi-layers"></i> Levels
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="cs-nav-link" href="problems.html">
+              <i class="bi bi-code-slash"></i> Problems
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="cs-nav-link" href="contest.html">
+              <i class="bi bi-stopwatch"></i> Contest
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="cs-nav-link" href="progress.html">
+              <i class="bi bi-graph-up-arrow"></i> Progress
+            </a>
+          </li>
+        </ul>
+
+        <div class="nav-actions">
+          <button class="btn-icon" id="navNotificationBtn" title="Speed Tips & Notifications" aria-label="Notifications">
+            <i class="bi bi-bell"></i>
+            <span class="notification-badge"></span>
+          </button>
+          <button class="btn-cs-secondary" data-bs-toggle="modal" data-bs-target="#profileModal" id="navProfileBtn">
+            <i class="bi bi-person-circle"></i>
+            <span id="navProfileBtnText">Sprint Master</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="hero-section container">
+      <!-- Badge -->
+      <div class="d-inline-block mb-3">
+        <span class="badge-pill-accent">
+          <i class="bi bi-lightning-charge-fill"></i> Speed Training for Competitive Programmers
+        </span>
+      </div>
+
+      <!-- Main Heading -->
+      <h1 class="hero-title">
+        Build your competitive <br><span class="text-gradient">programming speed</span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="hero-subtitle">
+        Train with timed coding challenges, practice at your own pace, and track your progress as you become a faster problem solver.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="hero-actions">
+        <a href="levels.html" class="btn-cs-primary">
+          <i class="bi bi-play-circle-fill"></i> Start Training Free
+        </a>
+        <a href="problems.html" class="btn-cs-secondary">
+          <i class="bi bi-grid-3x3-gap"></i> Explore Problems
+        </a>
+      </div>
+
+      <!-- Four Stat Target Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value text-gradient">11,000+</div>
+          <div class="stat-label">Coding Problems</div>
+          <small class="text-muted" style="font-size: 0.75rem;">From Codeforces Problemset</small>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value text-gradient">8</div>
+          <div class="stat-label">Difficulty Levels</div>
+          <small class="text-muted" style="font-size: 0.75rem;">Level A to Level H</small>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value text-gradient">6</div>
+          <div class="stat-label">Training Stages</div>
+          <small class="text-muted" style="font-size: 0.75rem;">Calibrated Target Speeds</small>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value text-gradient">100%</div>
+          <div class="stat-label">Progress Tracking</div>
+          <small class="text-muted" style="font-size: 0.75rem;">Personalized Local Analytics</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Features Section -->
+    <section class="container py-5">
+      <div class="text-center mb-5">
+        <span class="badge-pill-accent mb-2">Why CodeSprint</span>
+        <h2 class="mt-2" style="font-size: 2.2rem;">Everything you need to solve faster</h2>
+        <p class="text-secondary mx-auto" style="max-width: 620px;">
+          Purpose-built for competitive coders who want to eliminate hesitation and crush contests under time pressure.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <i class="bi bi-alarm-fill"></i>
+            </div>
+            <h3 class="h5 mb-2">Smart Practice Timer</h3>
+            <p class="text-secondary mb-0">
+              Adaptive countdown timers calibrated to realistic contest targets. Learn to think quickly, manage time budgets, and hit the buzzer.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <i class="bi bi-diagram-3-fill"></i>
+            </div>
+            <h3 class="h5 mb-2">Structured Problem Levels</h3>
+            <p class="text-secondary mb-0">
+              Eight tiered levels mapped directly to Codeforces contest ratings (800 to 3500). Progress smoothly from warmup Div. 2 A to elite Div. 1 E+.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <i class="bi bi-graph-up"></i>
+            </div>
+            <h3 class="h5 mb-2">Performance Analytics</h3>
+            <p class="text-secondary mb-0">
+              Instant visual dashboards of your solve times, success rates, and difficulty distribution using interactive Chart.js graphs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Workflow / How it works -->
+    <section class="container py-5 my-3">
+      <div class="cs-card p-4 p-lg-5" style="border-color: var(--border-light); background: linear-gradient(180deg, #171A21 0%, #12151B 100%);">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-6">
+            <span class="badge-pill-accent mb-3">Structured Workflow</span>
+            <h2 style="font-size: 2.2rem;" class="mb-3">Systematic Speed Training</h2>
+            <p class="text-secondary mb-4">
+              Solving problems untimed builds knowledge, but timed training builds contest intuition. CodeSprint trains your muscle memory so you never run out of contest minutes.
+            </p>
+            
+            <div class="d-flex flex-column gap-3">
+              <div class="d-flex align-items-start gap-3">
+                <span class="badge rounded-circle bg-dark text-white p-2 border border-secondary" style="width: 32px; height: 32px; display:flex; align-items:center; justify-content:center;">1</span>
+                <div>
+                  <h6 class="mb-1 text-white">Select Your Level</h6>
+                  <p class="text-muted small mb-0">Target problems matching your current rating zone or stretch goals.</p>
+                </div>
+              </div>
+              <div class="d-flex align-items-start gap-3">
+                <span class="badge rounded-circle bg-dark text-white p-2 border border-secondary" style="width: 32px; height: 32px; display:flex; align-items:center; justify-content:center;">2</span>
+                <div>
+                  <h6 class="mb-1 text-white">Beat the Clock</h6>
+                  <p class="text-muted small mb-0">Launch dedicated focus timers with Start, Pause, Resume and Reset controls.</p>
+                </div>
+              </div>
+              <div class="d-flex align-items-start gap-3">
+                <span class="badge rounded-circle bg-dark text-white p-2 border border-secondary" style="width: 32px; height: 32px; display:flex; align-items:center; justify-content:center;">3</span>
+                <div>
+                  <h6 class="mb-1 text-white">Track & Level Up</h6>
+                  <p class="text-muted small mb-0">Review solved counts, difficulty breakdown, and practice trends on your dashboard.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-2">
+              <a href="contest.html" class="btn-cs-primary me-2">
+                <i class="bi bi-flag-fill"></i> Try Virtual Contest
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <!-- Mock Preview Card -->
+            <div class="cs-card cs-card-glow p-4" style="background: #0D1016; border-color: rgba(255, 100, 124, 0.3);">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="badge bg-danger" style="background: var(--accent-gradient) !important;">LIVE TIMER DEMO</span>
+                  <span class="text-white small fw-bold">CF 1941A</span>
+                </div>
+                <span class="badge-rating-pupil px-2 py-1 rounded small">800 • Level A</span>
+              </div>
+              <h5 class="text-white mb-2">Rudolf and the Ticket</h5>
+              <div class="text-muted small mb-3">Tags: brute force, math</div>
+              
+              <div class="p-3 text-center my-3 rounded" style="background: #171A21; border: 1px solid #292D36;">
+                <div class="text-muted small text-uppercase">Time Remaining</div>
+                <div style="font-family: var(--font-mono); font-size: 2.8rem; font-weight: 700; color: #FF647C;">08:42</div>
+                <div class="progress mt-2" style="height: 6px; background: #0B0D10;">
+                  <div class="progress-bar" style="width: 87%; background: var(--accent-gradient);"></div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="text-success small"><i class="bi bi-shield-check"></i> Target: 10 mins</span>
+                <a href="practice.html" class="btn-cs-secondary py-1 px-3 small">
+                  Open Practice <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom CTA Banner -->
+    <section class="container py-5 text-center">
+      <div class="cs-card p-5" style="border: 1px solid rgba(255, 100, 124, 0.3); background: radial-gradient(circle at center, rgba(255, 49, 90, 0.08) 0%, #171A21 80%);">
+        <h2 style="font-size: 2.4rem;" class="mb-3">Ready to accelerate your rating?</h2>
+        <p class="text-secondary mx-auto mb-4" style="max-width: 550px;">
+          Join competitive programmers training with timed Codeforces problems. Completely free, no registration required.
+        </p>
+        <a href="levels.html" class="btn-cs-primary btn-lg">
+          <i class="bi bi-lightning-fill"></i> Start Your First Sprint
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="cs-footer">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-md-6 text-center text-md-start">
+          <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mb-2">
+            <img src="assets/logo.svg" alt="CodeSprint Logo" style="width: 24px; height: 24px;">
+            <strong class="text-white">CodeSprint</strong>
+            <span class="text-muted">| Practice smarter. Solve faster.</span>
+          </div>
+          <p class="text-muted small mb-0">
+            A minimalist, high-performance speed training platform for competitive programmers. Powered by Codeforces Public API.
+          </p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <div class="d-flex justify-content-center justify-content-md-end gap-3 mb-2">
+            <a href="levels.html">Levels</a>
+            <a href="problems.html">Problems</a>
+            <a href="contest.html">Contest</a>
+            <a href="progress.html">Progress</a>
+            <a href="profile.html">Profile</a>
+          </div>
+          <div class="text-muted small">
+            &copy; 2026 CodeSprint. Built with HTML, CSS, Vanilla JS & Bootstrap 5.
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- User Profile Modal -->
+  <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content cs-modal">
+        <div class="modal-header cs-modal-header">
+          <h5 class="modal-title text-white" id="profileModalLabel">
+            <i class="bi bi-person-gear text-gradient"></i> Local Profile & Settings
+          </h5>
+          <button type="button" class="btn-close-cs" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-body p-4">
+          <div class="mb-3">
+            <label class="form-label text-secondary small fw-bold">Display Name</label>
+            <input type="text" id="profileDisplayNameInput" class="cs-input" placeholder="e.g. Sprint Master">
+          </div>
+          <div class="mb-3">
+            <label class="form-label text-secondary small fw-bold">Codeforces Handle (Optional)</label>
+            <input type="text" id="profileCfHandleInput" class="cs-input" placeholder="e.g. tourist">
+            <div class="form-text text-muted small">Your handle will be linked to your stats.</div>
+          </div>
+          <div class="mb-4">
+            <label class="form-label text-secondary small fw-bold">Preferred Training Stage</label>
+            <select id="profileStageSelect" class="cs-input cs-select">
+              <option value="Beginner">Beginner (Level A - B)</option>
+              <option value="Intermediate" selected>Intermediate (Level C - D)</option>
+              <option value="Advanced">Advanced (Level E - F)</option>
+              <option value="Master">Master (Level G - H)</option>
+            </select>
+          </div>
+
+          <div class="alert alert-dark border-secondary p-3 mb-4" style="background: #12151B; font-size: 0.82rem; color: #A1A1AA;">
+            <i class="bi bi-info-circle text-info me-1"></i>
+            All progress and sessions are stored strictly in your browser's LocalStorage. No remote server or account required.
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center pt-2 border-top border-secondary">
+            <button type="button" id="btnResetAllData" class="btn-cs-danger py-1 px-3 small">
+              <i class="bi bi-trash3"></i> Reset Data
+            </button>
+            <a href="profile.html" class="text-secondary small">View Detailed Profile &rarr;</a>
+          </div>
+        </div>
+        <div class="modal-footer cs-modal-footer">
+          <button type="button" class="btn-cs-secondary py-1 px-3" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" id="btnSaveProfile" class="btn-cs-primary py-1 px-4">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core Scripts -->
+  <script src="js/backend-api.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

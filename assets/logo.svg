@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" width="100%" height="100%">
+  <defs>
+    <linearGradient id="csGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF647C" />
+      <stop offset="100%" stop-color="#FF315A" />
+    </linearGradient>
+    <filter id="csGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  
+  <!-- Outer Rounded Hexagon Background -->
+  <rect x="6" y="6" width="88" height="88" rx="24" fill="#171A21" stroke="#292D36" stroke-width="2.5"/>
+  
+  <!-- Subtle Gradient Accent Border Glow -->
+  <rect x="6" y="6" width="88" height="88" rx="24" stroke="url(#csGradient)" stroke-width="1.5" opacity="0.4"/>
+  
+  <!-- Dynamic Lightning Bolt Symbol representing Speed & Sprint -->
+  <path d="M54 16 L28 52 L48 52 L42 84 L72 44 L52 44 Z" 
+        fill="url(#csGradient)" 
+        filter="url(#csGlow)" />
+        
+  <!-- Core Sharp Bolt Highlight -->
+  <path d="M54 16 L28 52 L48 52 L42 84 L72 44 L52 44 Z" 
+        fill="url(#csGradient)" />
+</svg>

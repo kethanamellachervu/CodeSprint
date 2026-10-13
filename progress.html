@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Progress Analytics - CodeSprint</title>
+  <meta name="description" content="Personalized speed training analytics, solve charts, difficulty breakdown, and recent practice history.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <div class="glow-orb-top"></div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg cs-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="assets/logo.svg" alt="CodeSprint Logo" class="logo-img">
+        <div>
+          <div>Code<span class="text-gradient">Sprint</span></div>
+          <span class="brand-tagline">Practice smarter. Solve faster.</span>
+        </div>
+      </a>
+
+      <button class="navbar-toggler text-light border-0" type="button" data-bs-toggle="collapse" data-bs-target="#csNavbarNav" aria-label="Toggle navigation">
+        <i class="bi bi-list fs-2 text-white"></i>
+      </button>
+
+      <div class="collapse navbar-collapse" id="csNavbarNav">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-1">
+          <li class="nav-item"><a class="cs-nav-link" href="index.html"><i class="bi bi-house-door"></i> Home</a></li>
+          <li class="nav-item"><a class="cs-nav-link" href="levels.html"><i class="bi bi-layers"></i> Levels</a></li>
+          <li class="nav-item"><a class="cs-nav-link" href="problems.html"><i class="bi bi-code-slash"></i> Problems</a></li>
+          <li class="nav-item"><a class="cs-nav-link" href="contest.html"><i class="bi bi-stopwatch"></i> Contest</a></li>
+          <li class="nav-item"><a class="cs-nav-link active" href="progress.html"><i class="bi bi-graph-up-arrow"></i> Progress</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <button class="btn-icon" id="navNotificationBtn" title="Speed Tips" aria-label="Notifications">
+            <i class="bi bi-bell"></i>
+            <span class="notification-badge"></span>
+          </button>
+          <button class="btn-cs-secondary" data-bs-toggle="modal" data-bs-target="#profileModal" id="navProfileBtn">
+            <i class="bi bi-person-circle"></i>
+            <span id="navProfileBtnText">Sprint Master</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Progress Main -->
+  <main class="container py-4">
+    <!-- Header -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+      <div>
+        <span class="badge-pill-accent mb-2">Performance Dashboard</span>
+        <h1 class="h2 text-white mb-1">Your Training Progress</h1>
+        <p class="text-secondary small mb-0">Track your solving speed, volume, and mastery distribution across all difficulty tiers.</p>
+      </div>
+
+      <div class="d-flex gap-2">
+        <button id="btnLoadDemoData" class="btn-cs-secondary py-1 px-3 small" title="Load sample practice data to preview charts">
+          <i class="bi bi-database-fill-add"></i> Load Demo Data
+        </button>
+        <button id="btnResetFromDashboard" class="btn-cs-danger py-1 px-3 small" title="Clear all local practice logs">
+          <i class="bi bi-trash3"></i> Reset Data
+        </button>
+      </div>
+    </div>
+
+    <!-- Empty State (Shown when no data exists) -->
+    <div id="progressEmptyState" class="empty-state cs-card p-5 my-4 d-none">
+      <i class="bi bi-speedometer2 empty-state-icon text-gradient"></i>
+      <h3 class="text-white mb-2">No Practice Activity Recorded Yet</h3>
+      <p class="text-secondary mx-auto mb-4" style="max-width: 500px;">
+        Complete your first timed problem sprint or simulated contest to unlock personalized charts and speed metrics.
+      </p>
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a href="levels.html" class="btn-cs-primary">
+          <i class="bi bi-lightning-fill"></i> Start Your First Sprint
+        </a>
+        <button onclick="document.getElementById('btnLoadDemoData').click()" class="btn-cs-secondary">
+          <i class="bi bi-magic"></i> Preview with Sample Data
+        </button>
+      </div>
+    </div>
+
+    <!-- Content Section (When data exists) -->
+    <div id="progressContentSection">
+      <!-- 4 Stat Metric Cards -->
+      <div class="stats-grid mb-4">
+        <div class="stat-card">
+          <div class="stat-value text-white" id="statTotalAttempted">0</div>
+          <div class="stat-label">Total Attempted</div>
+          <small class="text-muted" style="font-size: 0.75rem;">Sprint Sessions</small>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value text-gradient" id="statTotalSolved">0</div>
+          <div class="stat-label">Problems Solved</div>
+          <small class="text-muted" style="font-size: 0.75rem;">Verified Solves</small>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value text-success" id="statSuccessRate">0%</div>
+          <div class="stat-label">Success Rate</div>
+          <small class="text-muted" style="font-size: 0.75rem;">Solved vs Attempted</small>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value text-white" id="statTotalTime">0 mins</div>
+          <div class="stat-label">Total Practice Time</div>
+          <small class="text-muted" style="font-size: 0.75rem;">Time in Active Sprints</small>
+        </div>
+      </div>
+
+      <!-- Charts Row -->
+      <div class="row g-4 mb-4">
+        <!-- Chart 1: 7-Day Activity -->
+        <div class="col-lg-6">
+          <div class="cs-card p-4 h-100">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="text-white mb-0">Daily Practice Activity</h5>
+              <span class="text-muted small">Last 7 Days (Minutes)</span>
+            </div>
+            <div class="chart-container">
+              <canvas id="weeklyPracticeChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chart 2: Difficulty Breakdown -->
+        <div class="col-lg-6">
+          <div class="cs-card p-4 h-100">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="text-white mb-0">Solved by Difficulty Level</h5>
+              <span class="text-muted small">Levels A to H</span>
+            </div>
+            <div class="chart-container">
+              <canvas id="difficultyBreakdownChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recently Practiced Problems Table -->
+      <div class="cs-card p-4">
+        <h5 class="text-white mb-3">Recent Practice Sessions</h5>
+        <div class="table-responsive">
+          <table class="table table-dark table-hover mb-0" style="background: transparent;">
+            <thead>
+              <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-muted); font-size: 0.85rem;">
+                <th scope="col">PROBLEM</th>
+                <th scope="col">LEVEL</th>
+                <th scope="col">STATUS</th>
+                <th scope="col">TIME SPENT</th>
+                <th scope="col">DATE</th>
+              </tr>
+            </thead>
+            <tbody id="recentSessionsTableBody">
+              <!-- Rendered by js/progress.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- User Profile Modal -->
+  <div class="modal fade" id="profileModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content cs-modal">
+        <div class="modal-header cs-modal-header">
+          <h5 class="modal-title text-white">Local Profile & Settings</h5>
+          <button type="button" class="btn-close-cs" data-bs-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body p-4">
+          <div class="mb-3">
+            <label class="form-label text-secondary small fw-bold">Display Name</label>
+            <input type="text" id="profileDisplayNameInput" class="cs-input" placeholder="Sprint Master">
+          </div>
+          <div class="mb-3">
+            <label class="form-label text-secondary small fw-bold">Codeforces Handle</label>
+            <input type="text" id="profileCfHandleInput" class="cs-input" placeholder="e.g. tourist">
+          </div>
+          <div class="mb-4">
+            <label class="form-label text-secondary small fw-bold">Preferred Training Stage</label>
+            <select id="profileStageSelect" class="cs-input cs-select">
+              <option value="Beginner">Beginner (Level A - B)</option>
+              <option value="Intermediate" selected>Intermediate (Level C - D)</option>
+              <option value="Advanced">Advanced (Level E - F)</option>
+              <option value="Master">Master (Level G - H)</option>
+            </select>
+          </div>
+          <div class="d-flex justify-content-between align-items-center pt-2 border-top border-secondary">
+            <button type="button" id="btnResetAllData" class="btn-cs-danger py-1 px-3 small">
+              <i class="bi bi-trash3"></i> Reset Data
+            </button>
+            <a href="profile.html" class="text-secondary small">View Detailed Profile &rarr;</a>
+          </div>
+        </div>
+        <div class="modal-footer cs-modal-footer">
+          <button type="button" class="btn-cs-secondary py-1 px-3" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" id="btnSaveProfile" class="btn-cs-primary py-1 px-4">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Footer -->
+  <footer class="cs-footer">
+    <div class="container text-center text-md-start">
+      <div class="row g-4 align-items-center">
+        <div class="col-md-6">
+          <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mb-2">
+            <img src="assets/logo.svg" alt="CodeSprint Logo" style="width: 24px; height: 24px;">
+            <strong class="text-white">CodeSprint</strong>
+          </div>
+          <p class="text-muted small mb-0">Progress is stored locally in your browser's LocalStorage and persists across sessions.</p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <div class="d-flex justify-content-center justify-content-md-end gap-3 mb-2">
+            <a href="index.html">Home</a>
+            <a href="levels.html">Levels</a>
+            <a href="problems.html">Problems</a>
+            <a href="contest.html">Contest</a>
+          </div>
+          <div class="text-muted small">&copy; 2026 CodeSprint.</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/backend-api.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/progress.js"></script>
+</body>
+</html>
