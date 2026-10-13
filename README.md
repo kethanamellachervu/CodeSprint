@@ -1,241 +1,177 @@
-# ⚡ CodeSprint — Full-Stack Competitive Programming Platform
+# ⚡ CodeSprint — Competitive Programming Platform
 
-> **Practice smarter. Solve faster.**  
-> A high-performance, responsive competitive programming speed-training platform inspired by CFSpeed, complete with a Node.js/Express REST backend, MongoDB Atlas integration, JWT authentication, and Codeforces API problem caching.
+**Practice smarter. Solve faster.**
 
----
+CodeSprint is a full-stack competitive programming practice platform designed to help students and developers improve their problem-solving speed through structured practice, timed sessions, virtual contests, and progress tracking.
 
-## 🏗️ Project Architecture
+## 🚀 Features
 
-CodeSprint is built with a decoupled yet unified full-stack architecture:
+### 1. Timed Practice
+- Practise solving coding problems with a countdown timer.
+- Track the time spent on practice sessions.
+- Build consistency through time-based practice.
 
-- **Frontend**: Clean Vanilla JavaScript (ES6+), HTML5, CSS3 with dark theme and `#FF647C` -> `#FF315A` energy gradient accents, Bootstrap 5 responsive layout, and Chart.js analytics.
-- **Backend**: Node.js & Express.js REST API with modular controllers, routes, middleware, and Mongoose ODM models.
-- **Database**: MongoDB Atlas cloud cluster with fallback in-memory handling for zero-setup local development.
-- **Authentication**: Stateless JSON Web Token (JWT) with bcryptjs password hashing and rate-limited auth endpoints.
-- **Problem Caching**: Smart backend Codeforces catalog caching (TTL 1h) with rating-to-level mapping (Levels A to H).
-- **Hybrid Storage**: Full guest offline experience in `localStorage`, with one-click seamless cloud sync to MongoDB upon registration or login.
+### 2. Difficulty Levels
+- Organizes Codeforces problems into eight progressive difficulty levels.
+- Helps users move from easier problems to more challenging ones.
+- Encourages structured learning.
+
+### 3. Problem Explorer
+- Browse real Codeforces problems.
+- Search and filter problems by difficulty, rating, and topic.
+- Access problem statements directly on Codeforces.
+
+### 4. Virtual Contests
+- Practise with simulated five-problem contests.
+- Solve problems under time constraints.
+- Improve contest readiness and time management.
+
+### 5. Progress Dashboard
+- Track solved problems and practice sessions.
+- View topic-wise and difficulty-wise statistics.
+- Analyse practice time and problem-solving progress through charts.
+
+### 6. Guest Mode and Cloud Sync
+- Start practising without creating an account.
+- Store guest progress in browser local storage.
+- Synchronize guest progress with a user account after registration or login.
+
+## 🛠️ Tech Stack
+
+| Component | Technologies |
+|---|---|
+| Frontend | HTML5, CSS3, JavaScript (ES6+), Bootstrap 5 |
+| Charts | Chart.js |
+| Backend | Node.js, Express.js |
+| Database | MongoDB Atlas, Mongoose |
+| Authentication | JWT, bcryptjs |
+| Problem Data | Codeforces API |
+| Storage | Browser local storage and database persistence |
+
+## 🏗️ How It Works
+
+1. Users browse coding problems from the Codeforces problem catalog.
+2. They select problems based on difficulty or topic.
+3. They practise using the timer or participate in virtual contests.
+4. Their practice sessions and solved problems can be recorded.
+5. The dashboard displays progress and performance statistics.
+6. Registered users can synchronize their progress with the backend.
+
+## 📂 Project Structure
 
 ```text
 CodeSprint/
 ├── assets/
-│   └── logo.svg                 # Custom lightning vector logo
 ├── backend/
 │   ├── config/
-│   │   └── db.js                # MongoDB Atlas connection & fallback handling
 │   ├── controllers/
-│   │   ├── authController.js    # Register, login, me
-│   │   ├── problemController.js # CF catalog fetching, caching, filtering
-│   │   ├── progressController.js# Solve, unsolve, stats, sessions, sync
-│   │   └── userController.js    # Profile retrieve and update
 │   ├── middleware/
-│   │   └── authMiddleware.js    # JWT verification & optional auth
 │   ├── models/
-│   │   ├── PracticeSession.js   # Timed practice session schema
-│   │   ├── Progress.js          # Solved problems & topic history schema
-│   │   └── User.js              # User account & bcrypt schema
 │   ├── routes/
-│   │   ├── auth.js              # /api/auth routes
-│   │   ├── problems.js          # /api/problems routes
-│   │   ├── progress.js          # /api/progress routes
-│   │   ├── sessions.js          # /api/sessions routes
-│   │   └── users.js             # /api/users routes
 │   ├── utils/
-│   │   └── memoryStore.js       # Fallback store when Atlas is offline
-│   ├── .env.example             # Environment variable template
-│   ├── server.js                # Express app entrypoint & static server
-│   ├── test-api.js              # Automated 19-point API test suite
-│   └── test-e2e.js              # End-to-end user journey simulation
+│   ├── server.js
+│   └── .env.example
 ├── css/
-│   ├── components.css           # UI components, badges, timer display
-│   ├── responsive.css           # Breakpoints for mobile, tablet, desktop
-│   └── style.css                # Base theme & design tokens
 ├── js/
-│   ├── api.js                   # Codeforces API client with backend fallback
-│   ├── app.js                   # Global navigation, auth modal, toast alerts
-│   ├── backend-api.js           # Reusable client API helper with JWT management
-│   ├── contest.js               # 5-problem virtual contest simulation
-│   ├── levels.js                # 8 difficulty tiers & live problem counts
-│   ├── problems.js              # Problem explorer search, filter, pagination
-│   ├── progress.js              # Progress analytics & Chart.js renderer
-│   ├── storage.js               # Hybrid LocalStorage + cloud sync manager
-│   └── timer.js                 # Countdown timer engine & session logger
-├── contest.html                 # Virtual contest simulation page
-├── index.html                   # Landing page with hero & statistics
-├── levels.html                  # 8 difficulty levels overview
-├── practice.html                # Dedicated sprint timer interface
-├── problems.html                # Codeforces problem explorer
-├── profile.html                 # Account preferences & data settings
-├── progress.html                # Cloud analytics dashboard
-├── package.json                 # Project dependencies & scripts
-└── README.md                    # Project documentation
+├── contest.html
+├── index.html
+├── levels.html
+├── practice.html
+├── problems.html
+├── profile.html
+├── progress.html
+├── package.json
+└── README.md
 ```
 
----
+## ⚙️ Installation and Setup
 
-## ⚙️ Prerequisites & Node Version
+### Prerequisites
+- Node.js 18 or later
+- npm
+- MongoDB Atlas account for persistent cloud storage
 
-- **Node.js**: `v18.0.0` or higher (tested on Node `v24.11.0`)
-- **npm**: `v9.0.0` or higher
-- **MongoDB Atlas** account (free cluster tier works great)
-
----
-
-## 🚀 Quick Start & Installation
-
-### 1. Clone & Install Dependencies
+### 1. Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/kethanamellachervu/CodeSprint.git
 cd CodeSprint
+```
+
+### 2. Install dependencies
+
+```bash
 npm install
 ```
 
-### 2. Configure Environment Variables
+### 3. Configure environment variables
 
-Copy `backend/.env.example` to `backend/.env`:
+Create your local environment file by copying the example.
 
-```bash
-# On Windows PowerShell
+**Windows PowerShell:**
+
+```powershell
 Copy-Item backend/.env.example backend/.env
-
-# On macOS/Linux
-cp backend/.env.example backend/.env
 ```
 
-Edit `backend/.env` with your settings:
+Configure the values in `backend/.env`:
 
 ```env
 PORT=5050
 NODE_ENV=development
-JWT_SECRET=your_super_secret_jwt_key_here
+JWT_SECRET=replace_with_a_secure_secret
 JWT_EXPIRES_IN=7d
-
-# MongoDB Atlas Connection String
-# Replace with your real MongoDB Atlas cluster connection string:
-MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/codesprint?retryWrites=true&w=majority
+MONGODB_URI=your_mongodb_connection_string
 ```
 
-> **Note**: If `MONGODB_URI` is left blank, CodeSprint automatically starts in **local fallback mode** with an in-memory database so all APIs, user registrations, logins, solves, and charts work immediately for testing without blocking you!
+Use your actual MongoDB connection string and keep secrets private. Do not commit your `.env` file.
 
-### 3. Run the Application
-
-Start the Express backend (which also serves the frontend):
+### 4. Start the application
 
 ```bash
 npm start
 ```
 
-Or for development:
+Open the application at:
 
-```bash
-npm run dev
-```
+`http://localhost:5050`
 
-Visit **`http://localhost:5050`** in your browser.
+## 🧪 Testing
 
----
+The repository includes API and end-to-end test scripts.
 
-## 🍃 MongoDB Atlas Setup Guide
+Run the API tests:
 
-1. Log in to [MongoDB Cloud](https://cloud.mongodb.com/).
-2. Create a free **M0 Shared Cluster**.
-3. Under **Database Access**, create a database user (e.g. `codesprint_user`) with read/write privileges.
-4. Under **Network Access**, add `0.0.0.0/0` (allow access from anywhere) or your current IP.
-5. In your cluster dashboard, click **Connect** -> **Drivers** -> Select **Node.js**.
-6. Copy the connection string into `backend/.env` as `MONGODB_URI`. Example:
-   ```text
-   MONGODB_URI=mongodb+srv://codesprint_user:YourSecurePassword@cluster0.abcde.mongodb.net/codesprint?retryWrites=true&w=majority
-   ```
-
----
-
-## 📡 REST API Documentation
-
-### Authentication (`/api/auth`)
-
-| Method | Endpoint | Access | Description |
-|---|---|---|---|
-| `POST` | `/api/auth/register` | Public | Register new account (`username`, `email`, `password`, `cfHandle`) |
-| `POST` | `/api/auth/login` | Public | Login with email/username and password, returns JWT |
-| `GET` | `/api/auth/me` | Private | Retrieve logged-in user profile and solve counts |
-
-### User Profile (`/api/users`)
-
-| Method | Endpoint | Access | Description |
-|---|---|---|---|
-| `GET` | `/api/users/profile` | Private | Get user profile preferences |
-| `PUT` | `/api/users/profile` | Private | Update display name, CF handle, stage, and daily target |
-
-### Problemset (`/api/problems`)
-
-| Method | Endpoint | Access | Description |
-|---|---|---|---|
-| `GET` | `/api/problems` | Public | Paginated problem list with filters: `level`, `tag`, `search`, `sort`, `page`, `limit` |
-| `GET` | `/api/problems/:id` | Public | Get single problem details by ID (e.g. `1941A`) |
-
-### Progress & Solves (`/api/progress`)
-
-| Method | Endpoint | Access | Description |
-|---|---|---|---|
-| `POST` | `/api/progress/solve` | Private | Mark problem as solved (prevents duplicate solves) |
-| `DELETE` | `/api/progress/solve/:problemId` | Private | Unmark a solved problem |
-| `GET` | `/api/progress` | Private | Get list of user's solved problems |
-| `GET` | `/api/progress/stats` | Private | Dashboard analytics: level-wise, topic-wise, daily minutes, success rate |
-| `POST` | `/api/progress/sync` | Private | Safely sync guest localStorage sessions into user's cloud account |
-
-### Practice Sessions (`/api/sessions`)
-
-| Method | Endpoint | Access | Description |
-|---|---|---|---|
-| `POST` | `/api/sessions` | Private | Save timed session duration; auto-updates Progress on solve |
-| `GET` | `/api/sessions` | Private | Get session history (paginated, sorted by date) |
-
-### Health Check
-
-| Method | Endpoint | Access | Description |
-|---|---|---|---|
-| `GET` | `/api/health` | Public | Returns service status, uptime, and database connection state |
-
----
-
-## 🧪 Testing Instructions
-
-CodeSprint includes automated test suites:
-
-### Run API Verification Suite (19 Tests)
 ```bash
 node backend/test-api.js
 ```
-Validates:
-- Health check
-- User registration & duplicate rejection
-- User login & invalid password rejection
-- Protected routes & token verification
-- User profile retrieval & update
-- Codeforces problem retrieval, level filtering, and single problem retrieval
-- Progress marking, unmarking, and statistics calculation
-- Practice session duration recording and retrieval
-- Guest session synchronization
 
-### Run End-to-End Simulation
+Run the end-to-end tests:
+
 ```bash
 node backend/test-e2e.js
 ```
-Simulates full registration, solving problems, cloud stats verification, and profile preference updates.
 
----
+Ensure the backend and its required configuration are available before running the tests.
 
-## 🛡️ Security Best Practices Implemented
+## 🔐 Security
 
-- **Password Hashing**: Passwords hashed with `bcryptjs` (salt rounds: 10). Plain-text passwords are never stored.
-- **JWT Protection**: Cryptographically signed tokens with configurable expiration (`7d`).
-- **Rate Limiting**: `express-rate-limit` prevents brute-force login attempts (100 requests per 15 minutes).
-- **Sensitive Data Exclusion**: Mongoose schema sanitization automatically strips password fields from JSON responses.
-- **CORS Protection**: Secure cross-origin resource sharing configured.
-- **Environment Isolation**: `.env` is ignored by git to protect credentials.
+- Password hashing using bcryptjs.
+- JWT-based authentication.
+- Environment variables for sensitive configuration.
+- Authentication middleware for protected endpoints.
+- Rate limiting on authentication endpoints.
 
----
+## 🎯 Project Goal
+
+CodeSprint brings problem discovery, timed practice, virtual contests, and progress tracking into one platform. Its goal is to help competitive programmers practise consistently, identify areas for improvement, and develop better problem-solving habits.
+
+## 👩‍💻 Author
+
+**Kethana Mellachervu**
+
+GitHub: [@kethanamellachervu](https://github.com/kethanamellachervu)
 
 ## 📄 License
-MIT © 2026 CodeSprint. Built for competitive programmers who want to solve faster.
+
+This project is licensed under the MIT License, subject to the repository's license file.
